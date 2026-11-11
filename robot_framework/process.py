@@ -35,7 +35,7 @@ INTERVAL_MINUTES = 30
 
 
 # pylint: disable-next=unused-argument
-    def process(orchestrator_connection: OrchestratorConnection, queue_element: QueueElement | None = None) -> None:
+def process(orchestrator_connection: OrchestratorConnection, queue_element: QueueElement | None = None) -> None:
     """Do the primary process of the robot."""
     orchestrator_connection.log_trace("Running process.")
     leanheat = orchestrator_connection.get_credential("DanfossAPINøgle")
