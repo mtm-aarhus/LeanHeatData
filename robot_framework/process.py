@@ -35,7 +35,7 @@ INTERVAL_MINUTES = 30
 
 
 # pylint: disable-next=unused-argument
-def process(orchestrator_connection: OrchestratorConnection, queue_element: QueueElement | None = None) -> None:
+    def process(orchestrator_connection: OrchestratorConnection, queue_element: QueueElement | None = None) -> None:
     """Do the primary process of the robot."""
     orchestrator_connection.log_trace("Running process.")
     leanheat = orchestrator_connection.get_credential("DanfossAPINøgle")
@@ -97,6 +97,9 @@ def process(orchestrator_connection: OrchestratorConnection, queue_element: Queu
     file_exists = download_file(client, f"{folder_path}/{file_name}", local_path)
     last_date = find_last_date(local_path) if file_exists else None
     days = days_to_fetch(last_date, datetime.now(LOCAL_TZ).date())
+    today = datetime.now(LOCAL_TZ).date()
+    days = days_to_fetch(last_date, today)
+    orchestrator_connection.log_info(f"DEBUG: today={today}, last_date={last_date}, days={days}")
 
     if not days:
         orchestrator_connection.log_info(f"Filen indeholder allerede data til og med {last_date}. Intet at hente.")
